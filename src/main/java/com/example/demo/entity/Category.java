@@ -13,6 +13,19 @@ public class Category {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public Category() {}
+	
+	/**
+	 * コンストラクタ
+	 * @param name
+	 */
+	public Category(String name) {
+		this.name = name;
+	}
 	
 	public Integer getId() {
 		return id;
