@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
 import com.example.demo.repository.CategoryRepository;
+
 
 
 
@@ -40,6 +42,7 @@ public class CategoryAdminController {
 		return "admin/addCategory";
 	}
 	
+	// カテゴリー登録処理
 	@PostMapping("/admin/categories/add")
 	public String store(@RequestParam(name = "name", defaultValue = "") String name) {
 		// リクエストパラメータをもとに登録するカテゴリーをインスタンス化
@@ -50,5 +53,29 @@ public class CategoryAdminController {
 		return "redirect:/admin/categories";
 	}
 	
+	// カテゴリー更新画面表示
+	@GetMapping("/admin/categories/{id}/edit")
+	public String edit(
+			@PathVariable("id") Integer id,
+			Model model) {
+		// リクエストパラメータをもとに更新対象のカテゴリーをデータベースから取得
+		Category category = categoryRepository.findById(id).get();
+		// 取得したカテゴリーをスコープに登録
+		model.addAttribute("category", category);
+		// 画面遷移
+		return "admin/editCategory";
+	}
+	
+	@PostMapping("/admin/categories/{id}/edit")
+	public String update(
+			@PathVariable("id") Integer id,
+			@RequestParam("name") String name) {
+		// 更新対象のカテゴリをインスタンス化
+		Category category = new Category(id, name);
+		// カテゴリーを永続化
+		categoryRepository.save(category);
+		// カテゴリ一覧画面表示にリダイレクト
+		return "redirect:/admin/categories";
+	}
 	
 }

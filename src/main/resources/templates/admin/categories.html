@@ -15,10 +15,16 @@
 				<tr>
 					<th>ID</th>
 					<th>カテゴリー名</th>
+					<th>更新</th>
 				</tr>
 				<tr th:each="category:${categoryList}">
 					<td th:text="${category.id}"></td>
 					<td th:text="${category.name}"></td>
+					<td>
+						<form th:action="'/admin/categories/' + ${category.id} + '/edit'" method="get">
+							<button>更新</button>
+						</form>
+					</td>
 				</tr>
 			</table>
 			<p><a href="/admin/categories/add">新規登録</a><br /><a href="/admin/items">商品管理</a></p>

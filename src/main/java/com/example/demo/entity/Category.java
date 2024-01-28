@@ -27,6 +27,16 @@ public class Category {
 		this.name = name;
 	}
 	
+	/**
+	 * コンストラクタ
+	 * @param id
+	 * @param name
+	 */
+	public Category(Integer id, String name) {
+		this(name);
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}
