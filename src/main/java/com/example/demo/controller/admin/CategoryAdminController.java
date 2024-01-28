@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
 import com.example.demo.repository.CategoryRepository;
+
 
 
 
@@ -36,5 +39,16 @@ public class CategoryAdminController {
 		// 画面遷移
 		return "admin/addCategory";
 	}
+	
+	@PostMapping("/admin/categories/add")
+	public String store(@RequestParam(name = "name", defaultValue = "") String name) {
+		// リクエストパラメータをもとに登録するカテゴリーをインスタンス化
+		Category category = new Category(name);
+		// インスタンス化したカテゴリーを永続化
+		categoryRepository.save(category);
+		// カテゴリー一覧画面表示にリダイレクト
+		return "redirect:/admin/categories";
+	}
+	
 	
 }
