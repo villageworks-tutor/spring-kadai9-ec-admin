@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Category;
@@ -44,6 +45,31 @@ public class ItemAdminController {
 		model.addAttribute("itemList", itemList);
 		// 画面遷移
 		return "admin/items";
+	}
+	
+	// 商品登録画面表示
+	@GetMapping("/admin/add")
+	public String create(Model model) {
+		// カテゴリーリストを取得
+		List<Category> categoryList = categoryRepository.findAll();
+		// 取得したカテゴリーリストをスコープに登録
+		model.addAttribute("categoryList", categoryList);
+		// 画面遷移
+		return "admin/addItem";
+	}
+	
+	// 商品登録処理
+	@PostMapping("/admin/add")
+	public String store(
+			@RequestParam(name = "categoryId", defaultValue = "") Integer categoryId,
+			@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "price", defaultValue = "") Integer price) {
+		// リクエストパラメータをもとに登録する商品をインスタンス化
+		Item item = new Item(categoryId, name, price);
+		// 商品のインスタンスを永続化
+		itemRepository.save(item);
+		// 商品一覧画面表示にリダイレクト
+		return "redirect:/admin/items";
 	}
 	
 }

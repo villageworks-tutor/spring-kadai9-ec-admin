@@ -21,6 +21,24 @@ public class Item {
 	@Transient
 	private Integer quantity;
 	
+	/**
+	 * デフォルトコンストラクタ
+	 */
+	public Item() {}
+	
+	/**
+	 * コンストラクタ
+	 * @param categoryId
+	 * @param name
+	 * @param price
+	 */
+	public Item(Integer categoryId, String name, Integer price) {
+		this.categoryId = categoryId;
+		this.name = name;
+		this.price = price;
+		this.quantity = 1;
+	}
+
 	public Integer getId() {
 		return id;
 	}
