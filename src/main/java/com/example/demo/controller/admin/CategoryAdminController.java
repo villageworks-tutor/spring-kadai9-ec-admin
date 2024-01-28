@@ -18,6 +18,7 @@ import com.example.demo.repository.CategoryRepository;
 
 
 
+
 @Controller
 public class CategoryAdminController {
 	
@@ -66,6 +67,7 @@ public class CategoryAdminController {
 		return "admin/editCategory";
 	}
 	
+	// カテゴリー更新処理
 	@PostMapping("/admin/categories/{id}/edit")
 	public String update(
 			@PathVariable("id") Integer id,
@@ -77,5 +79,14 @@ public class CategoryAdminController {
 		// カテゴリ一覧画面表示にリダイレクト
 		return "redirect:/admin/categories";
 	}
+	
+	@PostMapping("/admin/categories/{id}/delete")
+	public String delete(@PathVariable("id") Integer id) {
+		// パスパラメータで指定されたカテゴリーを削除
+		categoryRepository.deleteById(id);
+		// カテゴリ一覧画面表示にリダイレクト
+		return "redirect:/admin/categories";
+	}
+	
 	
 }
