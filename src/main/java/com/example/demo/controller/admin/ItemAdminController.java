@@ -16,6 +16,7 @@ import com.example.demo.repository.CategoryRepository;
 import com.example.demo.repository.ItemRepository;
 
 
+
 @Controller
 public class ItemAdminController {
 	
@@ -74,6 +75,7 @@ public class ItemAdminController {
 		return "redirect:/admin/items";
 	}
 	
+	// 商品更新画面表示
 	@GetMapping("/admin/{id}/edit")
 	public String edit(
 			@PathVariable("id") Integer id,
@@ -90,6 +92,7 @@ public class ItemAdminController {
 		return "admin/editItem";
 	}
 	
+	// 商品更新処理
 	@PostMapping("/admin/{id}/edit")
 	public String update(
 			@PathVariable("id") Integer id,
@@ -104,6 +107,13 @@ public class ItemAdminController {
 		return "redirect:/admin/items";
 	}
 	
+	@PostMapping("/admin/{id}/delete")
+	public String delete(@PathVariable("id") Integer id) {
+		// パスパラメータで指定された商品を削除
+		itemRepository.deleteById(id);
+		// 商品一覧画面表示にリダイレクト
+		return "redirect:/admin/items";
+	}
 	
 	
 }
