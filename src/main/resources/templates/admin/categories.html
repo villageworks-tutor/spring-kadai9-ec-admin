@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サンプルショッピング管理</title>
+<link rel="stylesheet" th:href="@{'/css/style.css'}">
+</head>
+<body>
+	<th:block th:replace="parts/admin_header"></th:block>
+	<hr />
+	<main>
+		<article>
+			<h2>カテゴリー一覧</h2>
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<th>カテゴリー名</th>
+					<th>更新</th>
+					<th>削除</th>
+				</tr>
+				<tr th:each="category:${categoryList}">
+					<td th:text="${category.id}"></td>
+					<td th:text="${category.name}"></td>
+					<td>
+						<form th:action="'/admin/categories/' + ${category.id} + '/edit'" method="get">
+							<button>更新</button>
+						</form>
+					</td>
+					<td>
+						<form th:action="'/admin/categories/' + ${category.id} + '/delete'" method="post">
+							<button>削除</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+			<p><a href="/admin/categories/add">新規登録</a><br /><a href="/admin/items">商品管理</a></p>
+		</article>
+	</main>
+	<hr />
+	<th:block th:replace="parts/footer"></th:block>
+</body>
+</html>
