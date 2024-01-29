@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サンプルショッピング管理</title>
+<link rel="stylesheet" th:href="@{'/css/style.css'}">
+</head>
+<body>
+	<th:block th:replace="parts/admin_header"></th:block>
+	<hr />
+	<main>
+		<article>
+			<h2>管理者ログイン</h2>
+			<form action="/admin/login" method="post">
+				<table border="1">
+					<tr>
+						<td><input type="text" name="name" placeholder="ユーザ名" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="password" placeholder="パスワード" /></td>
+					</tr>
+				</table>
+				<button>ログイン</button>
+				<p class="error" th:text="${error}"></p>
+			</form>
+		</article>
+	</main>
+	<hr />
+	<th:block th:replace="parts/footer"></th:block>
+</body>
+</html>
