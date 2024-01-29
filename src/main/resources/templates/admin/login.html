@@ -11,16 +11,17 @@
 	<main>
 		<article>
 			<h2>管理者ログイン</h2>
-			<form action="">
+			<form action="/admin/login" method="post">
 				<table border="1">
 					<tr>
-						<td><input type="password" name="name" placeholder="ユーザ名" /></td>
+						<td><input type="text" name="name" placeholder="ユーザ名" /></td>
 					</tr>
 					<tr>
-						<td><input type="password" name="password" placeholder="パスワード" /></td>
+						<td><input type="text" name="password" placeholder="パスワード" /></td>
 					</tr>
 				</table>
 				<button>ログイン</button>
+				<p class="error" th:text="${error}"></p>
 			</form>
 		</article>
 	</main>
