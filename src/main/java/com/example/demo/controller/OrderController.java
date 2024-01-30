@@ -81,11 +81,15 @@ public class OrderController {
 			@RequestParam(name = "email", defaultValue = "") String email,
 			Model model) {
 		
-		// 顧客情報の永続化
+		// 顧客情報の永続化：アカウント登録したユーザのみがログインできるので永続化ルーチンは不要となる
+		// 代わりにログインユーザの顧客番号が必要となる
+		Customer customer = customerRepository.findByEmail(email);
+		/*
 		// リクエストパラメータをもとに顧客のインスタンスを生成
 		Customer customer = new Customer(name, address, tel, email); // seq:43.6
 		// 顧客インスタンスの永続化
 		customerRepository.save(customer); // seq:43.7
+		*/
 		
 		// 注文永続化
 		// リクエストパラメータをもとに注文のインスタンスを生成
