@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>サンプルショッピング管理</title>
+<link rel="stylesheet" th:href="@{'/css/style.css'}">
+</head>
+<body>
+	<th:block th:replace="parts/admin_header"></th:block>
+	<hr />
+	<main>
+		<article>
+			<section>
+				<h2>顧客情報</h2>
+				<table border="1">
+					<tr>
+						<th>顧客ID</th>
+						<th>名前</th>
+						<th>住所</th>
+						<th>電話番号</th>
+						<th>メールアドレス</th>
+					</tr>
+					<tr>
+						<td th:text="${customer.id}"></td>
+						<td th:text="${customer.name}"></td>
+						<td th:text="${customer.address}"></td>
+						<td th:text="${customer.tel}"></td>
+						<td th:text="${customer.email}"></td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<h2>注文情報</h2>
+				<table border="1">
+					<tr>
+						<th>注文番号</th>
+						<th>注文日</th>
+						<th>合計金額</th>
+					</tr>
+					<tr th:each="order:${orderList}">
+						<td th:text="${order.id}"></td>
+						<td th:text="${order.orderedOn}"></td>
+						<td th:text="${order.tptalPrice}"></td>
+					</tr>
+				</table>
+			</section>
+			<section>
+				<h2>注文詳細</h2>
+				<table border="1">
+					<tr>
+						<th>注文番号</th>
+						<th>商品ID</th>
+						<th>数量</th>
+					</tr>
+					<tr th:each="detail:${detailList}">
+						<td th:text="${detail.orderId}"></td>
+						<td th:text="${detail.itemId}"></td>
+						<td th:text="${detail.quantity}"></td>
+					</tr>
+				</table>
+			</section>
+		</article>
+	</main>
+	<hr />
+	<th:block th:replace="parts/footer"></th:block>
+</body>
+</html>
