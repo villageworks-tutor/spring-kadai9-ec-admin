@@ -26,7 +26,7 @@
           <td th:text="${customer.address}"></td>
           <td th:text="${customer.tel}"></td>
           <td th:text="${customer.email}"></td>
-          <td><a href="">注文情報</a></td>
+          <td><a th:href="'/admin/customers/' + ${customer.id} + '/orders'">注文情報</a></td>
         </tr>
       </table>
       <p><a href="/admin/items">商品管理</a></p>

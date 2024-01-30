@@ -36,6 +36,7 @@ public class SenarioTest {
 			
 			// 顧客の新規登録
 			CustomersEntry.execute(driver);
+			
 			// ログイン
 			Login.execute(driver);
 			// 商品をカートに入れる
